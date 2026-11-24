@@ -22,6 +22,7 @@ window.MAP_DATA = {
       id: 'plant',
       type: 'plant',
       name: 'Metito Treatment Plant',
+      name_it: 'Impianto di trattamento Metito',
       ll: [45.4060, 20.3935],
       dir: 'top'
     },

@@ -10,6 +10,7 @@
   const canvas = document.getElementById('map-canvas');
   const ctx = canvas.getContext('2d');
   const svg = d3.select('#map-svg');
+  const lang = window.MAP_LANG || (new URLSearchParams(window.location.search).get('lang') === 'it' ? 'it' : 'en');
 
   const tileCache = new Map();
   let renderScheduled = false;
@@ -259,6 +260,7 @@
       }
 
       // Name Text (fully selectable with mouse cursor)
+      const displayName = (lang === 'it' && p.name_it) ? p.name_it : p.name;
       gLabel.append('text')
         .attr('class', 'lbl-name')
         .attr('x', dx)
@@ -266,7 +268,7 @@
         .attr('text-anchor', anchor)
         .attr('cursor', 'text')
         .attr('pointer-events', 'auto')
-        .text(p.name);
+        .text(displayName);
 
       // Subtitle Text (if present)
       if (p.sub) {
@@ -335,16 +337,16 @@
 
     // 2. Country name labels
     const countryLabels = [
-      { name: 'SERBIA', ll: [43.95, 20.85], size: 8.5, weight: 700, color: '#141918', isSerbia: true },
-      { name: 'HUNGARY', ll: [46.85, 19.30], size: 7.0, weight: 600, color: '#5c605c' },
-      { name: 'ROMANIA', ll: [45.65, 23.40], size: 7.0, weight: 600, color: '#5c605c' },
-      { name: 'BULGARIA', ll: [42.85, 24.20], size: 7.0, weight: 600, color: '#5c605c' },
-      { name: 'BOSNIA & HERZ.', ll: [44.15, 17.80], size: 6.2, weight: 600, color: '#5c605c' },
-      { name: 'CROATIA', ll: [45.55, 16.30], size: 6.2, weight: 600, color: '#5c605c' },
-      { name: 'SLOVENIA', ll: [46.15, 14.70], size: 5.8, weight: 600, color: '#5c605c' },
-      { name: 'MONTENEGRO', ll: [42.75, 18.95], size: 5.8, weight: 600, color: '#5c605c' },
-      { name: 'KOSOVO', ll: [42.50, 20.85], size: 5.8, weight: 600, color: '#5c605c' },
-      { name: 'N. MACEDONIA', ll: [41.65, 21.65], size: 5.8, weight: 600, color: '#5c605c' }
+      { name: 'SERBIA', it: 'SERBIA', ll: [43.95, 20.85], size: 8.5, weight: 700, color: '#141918', isSerbia: true },
+      { name: 'HUNGARY', it: 'UNGHERIA', ll: [46.85, 19.30], size: 7.0, weight: 600, color: '#5c605c' },
+      { name: 'ROMANIA', it: 'ROMANIA', ll: [45.65, 23.40], size: 7.0, weight: 600, color: '#5c605c' },
+      { name: 'BULGARIA', it: 'BULGARIA', ll: [42.85, 24.20], size: 7.0, weight: 600, color: '#5c605c' },
+      { name: 'BOSNIA & HERZ.', it: 'BOSNIA ED ERZ.', ll: [44.15, 17.80], size: 6.2, weight: 600, color: '#5c605c' },
+      { name: 'CROATIA', it: 'CROAZIA', ll: [45.55, 16.30], size: 6.2, weight: 600, color: '#5c605c' },
+      { name: 'SLOVENIA', it: 'SLOVENIA', ll: [46.15, 14.70], size: 5.8, weight: 600, color: '#5c605c' },
+      { name: 'MONTENEGRO', it: 'MONTENEGRO', ll: [42.75, 18.95], size: 5.8, weight: 600, color: '#5c605c' },
+      { name: 'KOSOVO', it: 'KOSOVO', ll: [42.50, 20.85], size: 5.8, weight: 600, color: '#5c605c' },
+      { name: 'N. MACEDONIA', it: 'MACEDONIA DEL N.', ll: [41.65, 21.65], size: 5.8, weight: 600, color: '#5c605c' }
     ];
 
     const gLabels = insetSvg.append('g').attr('class', 'inset-labels');
@@ -362,7 +364,7 @@
         .attr('stroke', lbl.isSerbia ? '#f6efe3' : '#eae4d8')
         .attr('stroke-width', 2.4)
         .attr('paint-order', 'stroke fill')
-        .text(lbl.name);
+        .text(lang === 'it' ? (lbl.it || lbl.name) : lbl.name);
     });
 
     // 3. Highlight the framed area of Zrenjanin on the Serbian territory

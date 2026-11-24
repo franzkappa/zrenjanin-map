@@ -120,7 +120,7 @@
     padding-top:10px;border-top:1px solid var(--rule);margin-bottom:8px;
   }
   .legend-cols{
-    display:flex;justify-content:flex-start;gap:18px;align-items:flex-start;
+    display:flex;justify-content:flex-start;gap:14px;align-items:flex-start;
   }
   .legend-col{
     display:flex;flex-direction:column;gap:6px;
@@ -203,20 +203,20 @@
 
   <div class="panel-stack">
     <header class="panel">
-      <div class="eyebrow">CIJI · Serbia</div>
-      <h1>Zrenjanin and the <em>water crisis</em></h1>
+      <div class="eyebrow" data-i18n="eyebrow">CIJI · Serbia</div>
+      <h1 data-i18n-html="title">Zrenjanin and the <em>water crisis</em></h1>
       <div class="legend">
         <div class="legend-cols">
           <div class="legend-col">
-            <div class="legend-row"><span class="key-dot"></span>Cities and villages</div>
-            <div class="legend-row"><span class="key-dot plant"></span>Metito Treatment Plant</div>
+            <div class="legend-row"><span class="key-dot"></span><span data-i18n="cities">Cities and villages</span></div>
+            <div class="legend-row"><span class="key-dot plant"></span><span data-i18n="plant">Metito Treatment Plant</span></div>
           </div>
           <div class="legend-col">
-            <div class="legend-row"><span class="key-line"></span>Rivers and basins</div>
+            <div class="legend-row"><span class="key-line"></span><span data-i18n="rivers">Rivers and basins</span></div>
           </div>
         </div>
       </div>
-      <p class="source">Data: OpenStreetMap contributors, CARTO</p>
+      <p class="source" data-i18n="source">Data: OpenStreetMap contributors, CARTO</p>
     </header>
 
     <figure class="inset">
@@ -235,9 +235,38 @@
     <span id="scale-label"></span>
   </div>
 
-  <div class="credits"><b>Map data</b> © OpenStreetMap contributors · <b>Basemap</b> © CARTO · CIJI / OBCT</div>
+  <div class="credits" data-i18n-html="credits"><b>Map data</b> © OpenStreetMap contributors · <b>Basemap</b> © CARTO · CIJI / OBCT</div>
 </div>
 
+<script>
+(function () {
+  var lang = new URLSearchParams(window.location.search).get('lang') === 'it' ? 'it' : 'en';
+  window.MAP_LANG = lang;
+  document.documentElement.lang = lang;
+  if (lang !== 'it') return;
+
+  var IT = {
+    docTitle: 'Zrenjanin e la crisi idrica — mappa',
+    eyebrow: 'CIJI · Serbia',
+    title: 'Zrenjanin e la <em>crisi idrica</em>',
+    cities: 'Città e villaggi',
+    plant: 'Impianto di trattamento Metito',
+    rivers: 'Fiumi e bacini',
+    source: 'Dati: contributori OpenStreetMap, CARTO',
+    credits: '<b>Dati cartografici</b> © OpenStreetMap contributors · <b>Mappa di base</b> © CARTO · CIJI / OBCT'
+  };
+
+  document.title = IT.docTitle;
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var k = el.getAttribute('data-i18n');
+    if (IT[k]) el.textContent = IT[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+    var k = el.getAttribute('data-i18n-html');
+    if (IT[k]) el.innerHTML = IT[k];
+  });
+})();
+</script>
 <script src="vendor/d3.min.js"></script>
 <script src="vendor/d3-tile.min.js"></script>
 <script src="source/places.js"></script>
