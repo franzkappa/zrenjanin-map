@@ -1,119 +1,131 @@
-# Zrenjanin e la crisi dell’acqua — Mappa editoriale D3.js
+# Zrenjanin and the water crisis — D3.js editorial map
 
-Mappa editoriale interattiva e responsive per l’inchiesta giornalistica CIJI / OBCT **“Safe to Drink, Hard to Trust: Zrenjanin’s Water Crisis Is Far from Over”**.
+Responsive editorial map for the CIJI / OBCT journalistic investigation **“Safe to Drink, Hard to Trust: Zrenjanin’s Water Crisis Is Far from Over”**.
 
-Questa edizione è realizzata con **D3.js (v7)** secondo un’architettura ibrida **Canvas + SVG**, ispirata agli standard editoriali cartografici de *Il Post* e alle mappe ad alta definizione per il data journalism.
+Built with **D3.js (v7)** using a hybrid **Canvas + SVG** architecture, designed for high-definition data journalism and seamless embedding in external articles.
 
----
-
-## Caratteristiche Principali
-
-1. **Testo reale vettoriale (DOM / SVG `<text>`) e piena selezionabilità**:
-   - Tutte le scritte della mappa (toponimi, sottotitoli, nomi dei fiumi BEGEJ e TISA, titolo e legenda) sono vero testo HTML/SVG.
-   - Pienamente **selezionabili col mouse (`cursor: text`, `user-select: text`), ricercabili (`Cmd+F`), accessibili** e scalabili su qualsiasi display ad alta densità (Retina, 4K) senza alcuna sgranatura.
-
-2. **Basemap chiara e luminosa (Stile *Il Post*)**:
-   - Superamento delle vecchie basemap raster sgranate e scure.
-   - Fondo carta caldo e luminoso (`#f6f2ea`, equivalente a `--land: #f4f2ec` de *Il Post*).
-   - Eliminazione delle ombreggiature fangose (hillshade scuro in moltiplicazione) per una resa nitida e tipografica.
-   - Tessuto urbano vettoriale (`assets/urban.geojson`) e rete viaria primaria/secondaria vettoriale (`assets/roads.geojson`) derivati da OpenStreetMap.
-
-3. **Idrografia vettoriale a poligoni reali**:
-   - Fiumi e bacini d'acqua non sono semplici linee uniformi, bensì **veri poligoni con la loro morfologia geografica** (`assets/water.geojson`):
-     - Alveo poligonale del fiume **Begej** con le anse storiche e i meandri urbani; etichetta toponomastica collocata al di sopra del corso d'acqua parallelamente all'asse fluviale, senza coprire la linea d'acqua né toccare la viabilità.
-     - Tratto poligonale del fiume **Tisa** sul confine occidentale, con etichetta aderente alla sponda.
-     - Bacini delle peschiere storiche di **Ribnjak Ečka** (Belo jezero, Koča jezero, Joca jezero, Mika jezero).
-     - Rete delle zone umide della riserva naturale di **Carska Bara**.
-     - Laghi urbani di Zrenjanin (Peskara, laghi centrali).
-     - Canale navigabile Danubio-Tisa-Danubio (DTD).
-
-4. **Legenda a due colonne ed Inset Map autonoma**:
-   - Legenda riorganizzata su **due colonne affiancate** per la massima compattezza ed equilibrio visivo:
-     - Colonna sinistra: **Pallino nero** per *Cities and villages* (Zrenjanin e gli 8 villaggi con pin neri e contorno bianco a contrasto) e **Rombo arancione** per *Metito Treatment Plant* (complesso di potabilizzazione).
-     - Colonna destra: **Linea teal** per *Rivers and basins* (fiumi Begej e Tisa, bacini urbani, vasche di Ečka e canali).
-   - Legenda essenziale senza intestazione "KEY" né dicitura ridondante "Map: CIJI".
-   - **Inset map autonoma ingrandita** (`.panel-stack`): presentata in una scheda separata ed elegante direttamente sotto al pannello di testata (`aspect-ratio: 306/200`). Mostra l'intera Serbia nel contesto regionale allargato dei Balcani e dell'Adriatico senza tagli artificiali a ovest (fino a 13.0°E, includendo interamente Slovenia, Croazia con Istria e isole, Bosnia-Erzegovina e mar Adriatico).
-   - Tutti i confini internazionali vettoriali sono nitidi e completi, con etichette toponomastiche chiare dotate di alone (`SERBIA`, `HUNGARY`, `ROMANIA`, `BULGARIA`, `BOSNIA & HERZ.`, `CROATIA`, `SLOVENIA`, `MONTENEGRO`, `KOSOVO`, `N. MACEDONIA`) ed evidenziazione in arancione dell'area inquadrata sul territorio della Serbia (senza puntini né toponimi ridondanti per la massima pulizia grafica).
-
-5. **Piena ottimizzazione per dispositivi mobili**:
-   - Layout fluido con calcolo automatico della proiezione cartografica (`d3.geoMercator().fitExtent(...)`).
-   - Adattamento dinamico su schermi stretti (≤ 700 px): scheda compatta in alto con legenda a due colonne, minimappa a 125 px in basso a sinistra e loghi OBCT/CIJI in basso a destra.
+- **Live map (English)**: https://franzkappa.github.io/zrenjanin-map/
+- **Live map (Italian)**: https://franzkappa.github.io/zrenjanin-map/?lang=it (also accessible via `/it/`)
 
 ---
 
-## Luoghi e Dati Geografici
+## Key Features
 
-Coordinate geografiche WGS84, verificate su OpenStreetMap/Nominatim:
+1. **Real vector typography (DOM / SVG `<text>`) & full text selection**:
+   - All map labels (place names, river labels `BEGEJ` and `TISA`, title, and legend) are real HTML/SVG text elements.
+   - Fully **selectable with the mouse cursor (`cursor: text`, `user-select: text`)**, searchable (`Cmd+F` / `Ctrl+F`), accessible, and crisp on Retina/4K displays without raster pixelation.
 
-| Luogo / Elemento | Tipo | Coordinate | Descrizione & Ruolo nell'inchiesta |
+2. **Clean, light paper basemap**:
+   - Warm paper background (`#f6f2ea`) free of raster artifacts or dark hillshade muddiness.
+   - Vector urban built-up areas (`assets/urban.geojson`) and primary/secondary road network (`assets/roads.geojson`) derived from OpenStreetMap.
+
+3. **True-polygon vector hydrography**:
+   - Rivers and water basins are rendered as **real geometric polygons** (`assets/water.geojson`):
+     - **Begej** river channel and urban meanders, with the `BEGEJ` label placed above and parallel to the watercourse without overlapping roads or water lines.
+     - **Tisa** river polygon along the western border, with its label hugging the riverbank.
+     - **Ribnjak Ečka** fishponds (*Belo jezero*, *Koča jezero*, *Joca jezero*, *Mika jezero*).
+     - **Carska Bara** wetland reserve network.
+     - Zrenjanin urban lakes (*Peskara*, central lakes).
+     - **Danube–Tisa–Danube (DTD)** navigable canal.
+
+4. **Two-column legend & standalone inset map**:
+   - Compact **two-column legend**:
+     - Left column: **Black dot** for *Cities and villages* (*Città e villaggi*) and **Orange diamond** for *Metito Treatment Plant* (*Impianto di trattamento Metito*).
+     - Right column: **Teal line** for *Rivers and basins* (*Fiumi e bacini idrici*).
+   - **Standalone inset locator map** (`.panel-stack`, `aspect-ratio: 306/200`) showing Serbia in its full Balkan & Adriatic context (down to 13.0°E, including Slovenia, Croatia, Bosnia & Herzegovina, and the Adriatic Sea) with international borders, haloed country labels, and an orange framing rectangle highlighting Zrenjanin.
+
+5. **Bilingual support (`EN` / `IT`)**:
+   - Single codebase serving English by default (`/` or `?lang=en`) and Italian via `?lang=it` (with `/it/` redirecting to `../?lang=it`).
+   - Translates header, `<title>`, `<html lang>`, legend items, plant label (`Impianto di trattamento Metito`), inset country labels (`UNGHERIA`, `CROAZIA`, `BOSNIA ED ERZ.`, `MACEDONIA DEL N.`, etc.), sources, and credits.
+
+6. **Mobile-first responsive layout**:
+   - Dynamic Mercator projection fitting (`d3.geoMercator().fitExtent(...)`).
+   - Dedicated compact mobile layout (`≤ 700 px`): top header card, 125 px inset map anchored bottom-left, and OBCT/CIJI logos bottom-right.
+
+---
+
+## Places & Geographic Data
+
+Verified WGS84 coordinates (OpenStreetMap / Nominatim):
+
+| Place / Feature | Type | Coordinates | Description & Role in the Investigation |
 |---|---|---|---|
-| **Zrenjanin** | Città | `45.3836, 20.3819` | Capoluogo della municipalità, pin nero centrale |
-| **Metito Treatment Plant** | Impianto | `45.4060, 20.3935` | Complesso di potabilizzazione gestito da Pannonian Water / Metito, pin a rombo arancione |
-| **Begej** | Fiume | Poligono fluviale | Asse idrografico su cui si scaricano i reflui, punto focale della crisi ecologica; etichetta collocata al di sopra dell'alveo fluviale |
-| **Tisa** | Fiume | Poligono fluviale | Fiume principale a ovest del comune di Zrenjanin |
-| **Mihajlovo** | Villaggio | `45.4719, 20.4164` | A nord di Zrenjanin, comunità rurale lungo la direttrice settentrionale |
-| **Elemir** | Villaggio | `45.4428, 20.2984` | A nord-ovest, comunità rurale storica |
-| **Aradac** | Villaggio | `45.3797, 20.3014` | A ovest di Zrenjanin, verso il fiume Tisa |
-| **Klek** | Villaggio | `45.4214, 20.4797` | A est, dove il Begej e il canale DTD entrano nella municipalità |
-| **Mužlja** | Quartiere / Villaggio | `45.3484, 20.4041` | Immediatamente a sud di Zrenjanin |
-| **Ečka** | Villaggio | `45.3176, 20.4394` | A sud lungo il Begej, sede del castello storico e delle peschiere |
-| **Lukino Selo** | Villaggio | `45.3069, 20.4266` | A sud, fra le aree umide e le vasche di acquacoltura |
-| **Stajićevo** | Villaggio | `45.2944, 20.4569` | A sud-est lungo il Begej, nei pressi della riserva naturale di Carska Bara |
+| **Zrenjanin** | City | `45.3836, 20.3819` | Municipality seat, central black pin |
+| **Metito Treatment Plant** | Plant | `45.4060, 20.3935` | Water treatment complex (*Fabrika vode*, Mihajlovački drum 10) operated by Pannonian Water / Metito, orange diamond pin |
+| **Begej** | River | River polygon | Main hydrographic axis impacted by discharges and ecological crisis |
+| **Tisa** | River | River polygon | Major river along the western border of Zrenjanin municipality |
+| **Mihajlovo** | Village | `45.4719, 20.4164` | Rural village north of Zrenjanin |
+| **Elemir** | Village | `45.4428, 20.2984` | Historic rural community north-west of Zrenjanin |
+| **Aradac** | Village | `45.3797, 20.3014` | Village west of Zrenjanin, toward the Tisa river |
+| **Klek** | Village | `45.4214, 20.4797` | Village east of Zrenjanin, where the Begej and DTD canal enter the municipality |
+| **Mužlja** | District / Village | `45.3484, 20.4041` | Immediately south of Zrenjanin |
+| **Ečka** | Village | `45.3176, 20.4394` | South along the Begej, site of the historic castle and fishponds |
+| **Lukino Selo** | Village | `45.3069, 20.4266` | South, nestled among wetlands and aquaculture basins |
+| **Stajićevo** | Village | `45.2944, 20.4569` | South-east along the Begej, near Carska Bara nature reserve |
 
 ---
 
-## Struttura del Progetto
+## Project Structure
 
-```
+```text
 .
-├── index.html                  Mappa principale interattiva/responsive in D3.js
-├── map_d3.js                   Motore D3: basemap canvas, vettori SVG (acque, strade, centri, toponimi), inset, scala
+├── index.html                    Main responsive D3.js map (supports ?lang=en and ?lang=it)
+├── it/
+│   └── index.html                Redirect to ../?lang=it for clean /it/ URLs
+├── map_d3.js                     D3 engine: canvas basemap, SVG vectors, inset map, scale bar
 ├── source/
-│   ├── places.js               Dati geografici dei toponimi e coordinate WGS84
-│   └── geo_layers.js           Bundle vettoriale compatto ad alte prestazioni (urban, strade, bacini, fiumi e confini Balcani)
+│   ├── places.js                 Place names (EN/IT) and WGS84 coordinates
+│   └── geo_layers.js             Synchronous vector bundle (urban, roads, water polygons, Balkans)
 ├── vendor/
-│   ├── d3.min.js               D3.js v7.9.2 (licenza BSD-3-Clause)
-│   └── d3-tile.min.js          Plugin ufficiale d3-tile per proiezioni Web Mercator
+│   ├── d3.min.js                 D3.js v7.9.2 (BSD-3-Clause)
+│   └── d3-tile.min.js            Official d3-tile plugin for Web Mercator projections
 ├── assets/
-│   ├── balkans-countries.geojson Dati vettoriali per la minimappa inset
-│   ├── water.geojson           Poligoni geografici reali di fiumi e bacini idrici
-│   ├── roads.geojson           Tracciati vettoriali della rete stradale
-│   ├── urban.geojson           Poligoni del tessuto urbano e rurale
-│   ├── fonts/                  Famiglia Montserrat (Regular, Medium, SemiBold, Bold) con licenza OFL
-│   └── logos/                  Loghi CIJI e OBCT in alta definizione
+│   ├── balkans-countries.geojson Vector boundaries for the inset locator map
+│   ├── water.geojson             OpenStreetMap river and water basin polygons
+│   ├── roads.geojson             Vector road network
+│   ├── urban.geojson             Urban and rural built-up polygons
+│   ├── fonts/                    Local Montserrat font family (OFL) — GDPR-compliant
+│   └── logos/                    High-resolution CIJI and OBCT logos
 ├── scripts/
-│   ├── check.sh                Script di verifica automatica dell'integrità
-│   └── check.py                Controlli di presenza asset, coordinate e struttura DOM
-├── favicon.ico                 Favicon
-├── robots.txt                  Direttive web crawler
-├── ISTRUZIONI_WEBMASTER.md     Guida rapida per pubblicazione e integrazione WordPress
-├── zrenjanin-map-webmaster.zip Pacchetto di distribuzione compatto pronto per la produzione (~776 KB)
-├── README.md                   Documentazione tecnica del progetto
-└── HANDOFF.md                  Note di passaggio di consegne e registro decisioni
+│   ├── check.sh                  Automated integrity check runner
+│   └── check.py                  Asset presence, coordinate bounds, and DOM/JS checks
+├── favicon.ico                   Favicon
+├── robots.txt                    Crawler directives (noindex)
+├── WEBMASTER_INSTRUCTIONS.md     WordPress & static-hosting deployment guide
+├── zrenjanin-map-webmaster.zip   Self-contained production bundle (~778 KB)
+├── README.md                     Technical documentation
+└── HANDOFF.md                    Handoff notes and decision log
 ```
 
 ---
 
-## Come Incorporare e Usare
+## Embed
 
-### 1. Inserimento in un articolo WordPress o CMS (Consigliato)
+The map is published via **GitHub Pages** from this repository. Use the URL matching the language of the host article:
 
-Ospitare la cartella della mappa come file statici sul server web (es. via FTP/cPanel in `/wp-content/uploads/interactive/zrenjanin-map/` o `/interactive/zrenjanin-map/`) e inserire nell'articolo un blocco **HTML personalizzato**:
-
+### English article
 ```html
-<!-- Mappa Editoriale CIJI / OBCT — Zrenjanin Water Crisis -->
-<div class="ciji-map-wrapper" style="position: relative; width: 100%; max-width: 1080px; margin: 2.5rem auto; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
-  <iframe
-    src="https://tuosito.org/interactive/zrenjanin-map/index.html"
-    title="Zrenjanin and the water crisis — editorial map"
-    style="width: 100%; height: 700px; border: 0; display: block;"
-    loading="lazy"
-    allowfullscreen>
-  </iframe>
-</div>
+<iframe
+  src="https://franzkappa.github.io/zrenjanin-map/"
+  title="Zrenjanin and the water crisis — editorial map"
+  style="width: 100%; height: 700px; border: 0; display: block;"
+  loading="lazy"
+  allowfullscreen>
+</iframe>
 ```
 
-Regola CSS opzionale per ottimizzare l'altezza su smartphone (da inserire nel CSS del tema WordPress):
+### Italian article
+```html
+<iframe
+  src="https://franzkappa.github.io/zrenjanin-map/?lang=it"
+  title="Zrenjanin e la crisi idrica — mappa editoriale"
+  style="width: 100%; height: 700px; border: 0; display: block;"
+  loading="lazy"
+  allowfullscreen>
+</iframe>
+```
+
+*(Optional responsive CSS for mobile devices in WordPress — Appearance → Customize → Additional CSS)*:
 ```css
 @media (max-width: 768px) {
   .ciji-map-wrapper iframe {
@@ -122,23 +134,21 @@ Regola CSS opzionale per ottimizzare l'altezza su smartphone (da inserire nel CS
 }
 ```
 
-### 2. Pacchetto per il Webmaster
-
-Per passare tutti i materiali al webmaster è disponibile l'archivio ZIP pronto all'uso:
-- **`zrenjanin-map-webmaster.zip`** (~776 KB): contiene tutti i file di produzione (`index.html`, `map_d3.js`, font Montserrat locali, vettori, loghi e dipendenze D3) inclusi nella cartella `zrenjanin-map/`, corredati dal file [`ISTRUZIONI_WEBMASTER.md`](ISTRUZIONI_WEBMASTER.md).
-
-### 3. Esecuzione in locale per sviluppo o anteprima
-
-```bash
-python3 -m http.server 8000
-# Aprire http://localhost:8000 nel browser
-```
+### Self-hosted Webmaster Bundle
+If you prefer hosting static files directly on your own server instead of GitHub Pages, deploy `zrenjanin-map-webmaster.zip` and follow [`WEBMASTER_INSTRUCTIONS.md`](WEBMASTER_INSTRUCTIONS.md).
 
 ---
 
-## Verifica e QA
+## Local Development & Verification
 
-Per eseguire tutti i test automatici di validazione:
+Start a local static server:
+```bash
+python3 -m http.server 8000
+# English: http://localhost:8000
+# Italian: http://localhost:8000/?lang=it
+```
+
+Run automated validation checks:
 ```bash
 ./scripts/check.sh
 ```
