@@ -71,8 +71,8 @@ The map is already hosted on GitHub Pages with HTTPS and global CDN caching:
 
 **English:**
 ```html
-<!-- CIJI / OBCT Editorial Map — Zrenjanin Water Crisis (EN) -->
-<div class="ciji-map-wrapper" style="position: relative; width: 100%; max-width: 1080px; margin: 2.5rem auto; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+<!-- CIJI / OBCT Editorial Map — Zrenjanin Water Crisis (EN) | Cartography: Federico Caruso, caruso@balcanicaucaso.org -->
+<div class="ciji-map-wrapper" data-cartography="Cartography: Federico Caruso, caruso@balcanicaucaso.org" style="position: relative; width: 100%; max-width: 1080px; margin: 2.5rem auto; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
   <iframe
     src="https://franzkappa.github.io/zrenjanin-map/"
     title="Zrenjanin and the water crisis — editorial map"
@@ -85,8 +85,8 @@ The map is already hosted on GitHub Pages with HTTPS and global CDN caching:
 
 **Italian:**
 ```html
-<!-- CIJI / OBCT Editorial Map — Zrenjanin Water Crisis (IT) -->
-<div class="ciji-map-wrapper" style="position: relative; width: 100%; max-width: 1080px; margin: 2.5rem auto; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+<!-- CIJI / OBCT Editorial Map — Zrenjanin Water Crisis (IT) | Cartografia: Federico Caruso, caruso@balcanicaucaso.org -->
+<div class="ciji-map-wrapper" data-cartography="Cartografia: Federico Caruso, caruso@balcanicaucaso.org" style="position: relative; width: 100%; max-width: 1080px; margin: 2.5rem auto; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
   <iframe
     src="https://franzkappa.github.io/zrenjanin-map/?lang=it"
     title="Zrenjanin e la crisi idrica — mappa editoriale"

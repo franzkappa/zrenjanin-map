@@ -1,4 +1,5 @@
 /* Places and geographic features for the Zrenjanin local water crisis map.
+   Cartography: Federico Caruso, caruso@balcanicaucaso.org
    Centered on the municipality of Zrenjanin, the Metito water treatment plant,
    the Begej river course, and surrounding villages.
    Coordinates: WGS84 [lat, lon]. */

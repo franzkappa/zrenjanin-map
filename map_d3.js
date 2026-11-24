@@ -1,5 +1,6 @@
 /* D3.js Editorial Map for Zrenjanin Water Crisis
    CIJI / OBCT Editorial Production
+   Cartography: Federico Caruso, caruso@balcanicaucaso.org
    Architecture: HTML5 Canvas (clean paper basemap) + SVG (crisp vector water polygons, roads, urban & selectable text)
 */
 

@@ -14,7 +14,7 @@ The map illustrates Zrenjanin's drinking water crisis, focusing on the **Metito 
   - English (default): https://franzkappa.github.io/zrenjanin-map/
   - Italian: https://franzkappa.github.io/zrenjanin-map/?lang=it (also accessible via `/it/`, which redirects to `../?lang=it`)
 - **Security & Privacy**: `*.docx` is excluded in `.gitignore` so unpublished article manuscripts stay local and are never pushed to the public repository. `.nojekyll` is present so GitHub Pages serves static assets directly. `robots.txt` disallows indexing (`Disallow: /`).
-- **Cache-busting**: `source/places.js?v=20261124-1` and `map_d3.js?v=20261124-1` are versioned in `index.html` so browser caches refresh immediately after updates.
+- **Cache-busting**: `source/places.js?v=20261124-2` and `map_d3.js?v=20261124-2` are versioned in `index.html` so browser caches refresh immediately after updates.
 - **Validation**: `./scripts/check.sh` → `ALL CHECKS PASS`.
 
 ---
@@ -80,6 +80,13 @@ The map illustrates Zrenjanin's drinking water crisis, focusing on the **Metito 
   - Added cache-busting query strings (`source/places.js?v=20261124-1`, `map_d3.js?v=20261124-1`) so browsers fetch updated JS immediately after deploys.
 - **Documentation**:
   - Translated `README.md`, `HANDOFF.md`, and `WEBMASTER_INSTRUCTIONS.md` (replacing `ISTRUZIONI_WEBMASTER.md`) to English and refreshed `zrenjanin-map-webmaster.zip`.
+
+### Phase 10 — Source attribution & cartography signature (2026-11-24)
+- **Non-visual authorship metadata**:
+  - Embedded cartography signature (`Cartography: Federico Caruso, caruso@balcanicaucaso.org` in EN, `Cartografia: Federico Caruso, caruso@balcanicaucaso.org` in IT) across `index.html` (HTML comment, `<meta name="author">`, `<meta name="cartography">`, `data-cartography` on `#map-container`, and `?lang=it` runtime updates), `it/index.html`, `map_d3.js`, and `source/places.js`.
+  - Added the same localized HTML comment and `data-cartography` attribute to the `.ciji-map-wrapper` embed snippets in `WEBMASTER_INSTRUCTIONS.md` and `README.md`.
+- **Cache-busting & bundle**:
+  - Bumped asset query strings in `index.html` to `?v=20261124-2` and rebuilt `zrenjanin-map-webmaster.zip`.
 
 ---
 

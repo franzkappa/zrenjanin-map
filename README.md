@@ -92,7 +92,7 @@ Verified WGS84 coordinates (OpenStreetMap / Nominatim):
 ├── favicon.ico                   Favicon
 ├── robots.txt                    Crawler directives (noindex)
 ├── WEBMASTER_INSTRUCTIONS.md     WordPress & static-hosting deployment guide
-├── zrenjanin-map-webmaster.zip   Self-contained production bundle (~778 KB)
+├── zrenjanin-map-webmaster.zip   Self-contained production bundle (~777 KB)
 ├── README.md                     Technical documentation
 └── HANDOFF.md                    Handoff notes and decision log
 ```
@@ -101,28 +101,34 @@ Verified WGS84 coordinates (OpenStreetMap / Nominatim):
 
 ## Embed
 
-The map is published via **GitHub Pages** from this repository. Use the URL matching the language of the host article:
+The map is published via **GitHub Pages** from this repository. Use the snippet matching the language of the host article:
 
 ### English article
 ```html
-<iframe
-  src="https://franzkappa.github.io/zrenjanin-map/"
-  title="Zrenjanin and the water crisis — editorial map"
-  style="width: 100%; height: 700px; border: 0; display: block;"
-  loading="lazy"
-  allowfullscreen>
-</iframe>
+<!-- CIJI / OBCT Editorial Map — Zrenjanin Water Crisis (EN) | Cartography: Federico Caruso, caruso@balcanicaucaso.org -->
+<div class="ciji-map-wrapper" data-cartography="Cartography: Federico Caruso, caruso@balcanicaucaso.org" style="position: relative; width: 100%; max-width: 1080px; margin: 2.5rem auto; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+  <iframe
+    src="https://franzkappa.github.io/zrenjanin-map/"
+    title="Zrenjanin and the water crisis — editorial map"
+    style="width: 100%; height: 700px; border: 0; display: block;"
+    loading="lazy"
+    allowfullscreen>
+  </iframe>
+</div>
 ```
 
 ### Italian article
 ```html
-<iframe
-  src="https://franzkappa.github.io/zrenjanin-map/?lang=it"
-  title="Zrenjanin e la crisi idrica — mappa editoriale"
-  style="width: 100%; height: 700px; border: 0; display: block;"
-  loading="lazy"
-  allowfullscreen>
-</iframe>
+<!-- CIJI / OBCT Editorial Map — Zrenjanin Water Crisis (IT) | Cartografia: Federico Caruso, caruso@balcanicaucaso.org -->
+<div class="ciji-map-wrapper" data-cartography="Cartografia: Federico Caruso, caruso@balcanicaucaso.org" style="position: relative; width: 100%; max-width: 1080px; margin: 2.5rem auto; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+  <iframe
+    src="https://franzkappa.github.io/zrenjanin-map/?lang=it"
+    title="Zrenjanin e la crisi idrica — mappa editoriale"
+    style="width: 100%; height: 700px; border: 0; display: block;"
+    loading="lazy"
+    allowfullscreen>
+  </iframe>
+</div>
 ```
 
 *(Optional responsive CSS for mobile devices in WordPress — Appearance → Customize → Additional CSS)*:
@@ -136,6 +142,13 @@ The map is published via **GitHub Pages** from this repository. Use the URL matc
 
 ### Self-hosted Webmaster Bundle
 If you prefer hosting static files directly on your own server instead of GitHub Pages, deploy `zrenjanin-map-webmaster.zip` and follow [`WEBMASTER_INSTRUCTIONS.md`](WEBMASTER_INSTRUCTIONS.md).
+
+---
+
+## Credits & Authorship
+
+- **Cartography**: Federico Caruso (`caruso@balcanicaucaso.org`) — CIJI / OBCT editorial production.
+- **Source attribution**: Embedded non-visually in `index.html`, `it/index.html`, `map_d3.js`, `source/places.js`, and the HTML embed snippets (`<meta name="author">`, `<meta name="cartography">`, `data-cartography`, and source comments), localized for both English and Italian (`?lang=it`).
 
 ---
 
