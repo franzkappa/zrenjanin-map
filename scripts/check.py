@@ -83,6 +83,8 @@ check("scale-bar" in page, "index.html: missing #scale-bar")
 check("Metito Treatment Plant" in page, "index.html: missing Metito in legend")
 check("Cities and villages" in page, "index.html: missing Cities and villages in legend")
 check("Rivers" in page, "index.html: missing Rivers in legend")
+check("Map: Federico Caruso/OBCT" in page, "index.html: missing EN map credit in legend")
+check("Mappa: Federico Caruso/OBCT" in page, "index.html: missing IT map credit in legend")
 check('class="deck"' not in page, "index.html: deck text under title should be removed")
 
 # 4. map_d3.js logic

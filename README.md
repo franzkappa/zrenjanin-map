@@ -32,6 +32,7 @@ Built with **D3.js (v7)** using a hybrid **Canvas + SVG** architecture, designed
    - Compact **two-column legend**:
      - Left column: **Black dot** for *Cities and villages* (*Città e villaggi*) and **Orange diamond** for *Metito Treatment Plant* (*Impianto di trattamento Metito*).
      - Right column: **Teal line** for *Rivers and basins* (*Fiumi e bacini idrici*).
+     - Legend footer (`.source`): data attribution (`Data: OpenStreetMap contributors, CARTO` / `Dati: contributori OpenStreetMap, CARTO`) and visible map credit (`Map: Federico Caruso/OBCT` / `Mappa: Federico Caruso/OBCT`).
    - **Standalone inset locator map** (`.panel-stack`, `aspect-ratio: 306/200`) showing Serbia in its full Balkan & Adriatic context (down to 13.0°E, including Slovenia, Croatia, Bosnia & Herzegovina, and the Adriatic Sea) with international borders, haloed country labels, and an orange framing rectangle highlighting Zrenjanin.
 
 5. **Bilingual support (`EN` / `IT`)**:
@@ -148,6 +149,7 @@ If you prefer hosting static files directly on your own server instead of GitHub
 ## Credits & Authorship
 
 - **Cartography**: Federico Caruso (`caruso@balcanicaucaso.org`) — CIJI / OBCT editorial production.
+- **Visible legend credit**: Displayed in the legend panel footer (`.source`) as `Map: Federico Caruso/OBCT` (English) and `Mappa: Federico Caruso/OBCT` (Italian, `?lang=it`).
 - **Source attribution**: Embedded non-visually in `index.html`, `it/index.html`, `map_d3.js`, `source/places.js`, and the HTML embed snippets (`<meta name="author">`, `<meta name="cartography">`, `data-cartography`, and source comments), localized for both English and Italian (`?lang=it`).
 
 ---

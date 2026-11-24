@@ -88,6 +88,13 @@ The map illustrates Zrenjanin's drinking water crisis, focusing on the **Metito 
 - **Cache-busting & bundle**:
   - Bumped asset query strings in `index.html` to `?v=20261124-2` and rebuilt `zrenjanin-map-webmaster.zip`.
 
+### Phase 11 — Visible map credit in legend (2026-11-24)
+- **Legend attribution**:
+  - Added `Map: Federico Caruso/OBCT` (English) and `Mappa: Federico Caruso/OBCT` (Italian, `?lang=it`) on a second line inside the `.source` footer of the legend panel (`index.html`, switching `.source` from `data-i18n` to `data-i18n-html`, with `margin: 7px 0 0`).
+- **Validation & bundle**:
+  - Extended `scripts/check.py` to verify both `Map: Federico Caruso/OBCT` and `Mappa: Federico Caruso/OBCT` in `index.html`.
+  - Updated documentation (`README.md`, `HANDOFF.md`) and rebuilt `zrenjanin-map-webmaster.zip`.
+
 ---
 
 ## Repository Architecture Summary
@@ -110,5 +117,5 @@ The map illustrates Zrenjanin's drinking water crisis, focusing on the **Metito 
 Verifies:
 1. Presence of all required files (HTML, JS, GeoJSON, logos, Montserrat fonts).
 2. Geographic coordinates within allowed desktop/mobile bounding boxes.
-3. DOM integrity in `index.html` (`Cities and villages`, `Metito Treatment Plant`, `Rivers`, absence of `.deck`).
+3. DOM integrity in `index.html` (`Cities and villages`, `Metito Treatment Plant`, `Rivers`, EN/IT `Map: Federico Caruso/OBCT` / `Mappa: Federico Caruso/OBCT` legend credit, absence of `.deck`).
 4. References to `d3.tile()`, `d3.geoMercator()`, and `pin-shadow` in `map_d3.js`.
