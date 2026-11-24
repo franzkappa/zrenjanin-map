@@ -122,6 +122,8 @@
   .legend-cols{
     display:flex;justify-content:flex-start;gap:14px;align-items:flex-start;
   }
+  html[lang="it"] .legend-cols{gap:10px}
+  html[lang="it"] .legend-row{font-size:7.8px;gap:5px}
   .legend-col{
     display:flex;flex-direction:column;gap:6px;
   }
@@ -251,7 +253,7 @@
     title: 'Zrenjanin e la <em>crisi idrica</em>',
     cities: 'Città e villaggi',
     plant: 'Impianto di trattamento Metito',
-    rivers: 'Fiumi e bacini',
+    rivers: 'Fiumi e bacini idrici',
     source: 'Dati: contributori OpenStreetMap, CARTO',
     credits: '<b>Dati cartografici</b> © OpenStreetMap contributors · <b>Mappa di base</b> © CARTO · CIJI / OBCT'
   };
@@ -269,8 +271,8 @@
 </script>
 <script src="vendor/d3.min.js"></script>
 <script src="vendor/d3-tile.min.js"></script>
-<script src="source/places.js"></script>
+<script src="source/places.js?v=20261124-1"></script>
 <script src="source/geo_layers.js"></script>
-<script src="map_d3.js"></script>
+<script src="map_d3.js?v=20261124-1"></script>
 </body>
 </html>
